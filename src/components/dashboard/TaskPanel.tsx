@@ -107,11 +107,14 @@ export function TaskPanel({ initialTasks, type, title }: TaskPanelProps) {
       createdAt: new Date(),
       completedAt: null,
     };
-    applyOptimistic({ type: "add", task: optimisticTask });
     setText("");
 
     startTransition(async () => {
+      // 1. Update UI instantly
+      applyOptimistic({ type: "add", task: optimisticTask });
+      
       try {
+        // 2. Call Server Action
         const created = await addTask(
           optimisticTask.title,
           type,
@@ -126,9 +129,12 @@ export function TaskPanel({ initialTasks, type, title }: TaskPanelProps) {
   };
 
   const handleToggle = (id: string) => {
-    applyOptimistic({ type: "toggle", id });
     startTransition(async () => {
+      // 1. Update UI instantly
+      applyOptimistic({ type: "toggle", id });
+      
       try {
+        // 2. Call Server Action
         const updated = await toggleTask(id);
         setTasks((prev) =>
           prev.map((task) => (task.id === updated.id ? updated : task))
@@ -140,9 +146,12 @@ export function TaskPanel({ initialTasks, type, title }: TaskPanelProps) {
   };
 
   const handleDelete = (id: string) => {
-    applyOptimistic({ type: "delete", id });
     startTransition(async () => {
+      // 1. Update UI instantly
+      applyOptimistic({ type: "delete", id });
+      
       try {
+        // 2. Call Server Action
         await deleteTask(id);
         setTasks((prev) => prev.filter((task) => task.id !== id));
       } finally {

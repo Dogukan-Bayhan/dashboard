@@ -181,7 +181,7 @@ export function TaskCard({ task, onToggle, onDelete }: TaskCardProps) {
           }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="mt-1 shrink-0 rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-400 transition-colors hover:border-red-500/60 hover:bg-red-500/20 hover:text-red-400 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+          className="relative z-50 mt-1 shrink-0 cursor-pointer rounded-full border border-white/10 bg-white/5 p-2.5 text-slate-400 transition-all hover:scale-110 hover:border-red-500/60 hover:bg-red-500/20 hover:text-red-500 focus:outline-none focus:ring-2 focus:ring-red-500/50"
         >
           <Trash2 className="size-4" strokeWidth={2.5} />
         </motion.button>
